@@ -1,0 +1,50 @@
+{
+  "batch_coins": 8,
+  "images_per_batch": 16,
+  "accumulation": 1,
+  "effective_batch_coins": 8,
+  "seed": 42,
+  "resolution": 384,
+  "max_epochs": 50,
+  "patience": 10,
+  "workers": 4,
+  "backbone_lr": 2e-05,
+  "head_lr": 0.0001,
+  "weight_decay": 0.01,
+  "gradient_clip_norm": 5,
+  "weights": "ConvNeXt_Tiny_Weights.IMAGENET1K_V1",
+  "selection": "validation AUROC",
+  "threshold": "max validation F1, highest threshold breaks ties",
+  "augmentation": "resize 384x384; independent rotation +/-10 degrees; ImageNet normalization",
+  "split_sha256": {
+    "train": "c0a9687c41ad840c54db46ee9e021a9f29e64ac71bdab386f8942367f5ff69eb",
+    "val": "36bf1871535f1b4bc796d8c7412fa2825c8066fcd87f7bcf565a020cc4535d71",
+    "test": "91ee7d594f8699c6f4f5e0b97a0a460666e58d879f19462ac2acac91d9f486f8"
+  },
+  "min_epochs": 15,
+  "scheduler": {
+    "name": "ReduceLROnPlateau",
+    "mode": "max",
+    "factor": 0.5,
+    "patience": 4,
+    "threshold": 0.0001,
+    "threshold_mode": "abs",
+    "min_lr": [
+      2e-07,
+      1e-06
+    ],
+    "start_after_epoch": 5,
+    "resets_early_stopping": false
+  },
+  "amp_overflow_policy": "retry same accumulation group up to 12 times at halved scale; CUDA RNG restored; never update bad gradients",
+  "architecture": "Shared ConvNeXt-Tiny pooled normalized 768D per side -> concat 1536 -> Linear256 GELU Linear1",
+  "initialization": "A0 ImageNet file only; never A0 best.pt",
+  "augmentation_rng": "42 + epoch*100000 + sample index; shared epoch tensor for persistent workers",
+  "head_parameters": "MLP only; backbone includes final LayerNorm",
+  "loader": {
+    "workers": 4,
+    "pin_memory": true,
+    "persistent_workers": true,
+    "prefetch_factor": 2
+  }
+}
