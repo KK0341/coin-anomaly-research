@@ -207,3 +207,17 @@
 /cloud_results/**/*credential*
 /cloud_results/**/*token*
 /cloud_results/**/*password*
+
+# B5 reviewed source only. Assets and experiment outputs remain ignored.
+!/算法训练/B/B5/
+!/算法训练/B/B5/代码/
+!/算法训练/B/B5/代码/model.py
+!/算法训练/B/B5/代码/b0_reference.py
+!/算法训练/B/B5/代码/prepare.py
+!/算法训练/B/B5/代码/train.py
+!/算法训练/B/B5/代码/evaluate.py
+!/算法训练/B/B5/代码/check_model.py
+!/算法训练/B/B5/代码/requirements.txt
+!/算法训练/B/B5/代码/setup.sh
+!/算法训练/B/B5/代码/run.sh
+!/算法训练/B/B5/代码/README.md
